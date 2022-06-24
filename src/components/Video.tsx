@@ -7,7 +7,7 @@ import {
 } from 'phosphor-react'
 import '@vime/core/themes/default.css'
 import { gql, useQuery } from '@apollo/client'
-
+/* @vite-ignore */
 const GET_LESSON_BY_SLUG = gql`
   query GetLessonBySlug($slug: String) {
     lesson(where: { slug: $slug }) {

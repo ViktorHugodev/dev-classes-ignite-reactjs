@@ -3,6 +3,7 @@ module.exports = {
   content: [
     './src/**/*.tsx'
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       backgroundImage:{
@@ -13,6 +14,22 @@ module.exports = {
         sans: 'Roboto, sans-serif',
       },
       colors: {
+        backDark: '#121214',
+        back:'#191622',
+        comment:'#5A4B81',
+        selection: "#41414D",
+        greenDark:"#67e480", 
+        pink: '#FF79C6',
+        grayMain: '#E1E1E6',
+        borders: '#323238',
+        shape:'#202024',
+        purple: {
+          300: "#996dff",
+          500: "#9466ff",
+          700: "#6833e4",
+          dark: '#28203e'
+        },
+        darkGray: '#44475a',
         green: {
           300: '#00B37E',
           500: '#00875F',

@@ -7,46 +7,22 @@ import {
 } from 'phosphor-react'
 import '@vime/core/themes/default.css'
 import { gql, useQuery } from '@apollo/client'
+import { useGetLessonBySlugQuery } from '../graphql/generated'
 /* @vite-ignore */
-const GET_LESSON_BY_SLUG = gql`
-  query GetLessonBySlug($slug: String) {
-    lesson(where: { slug: $slug }) {
-      title
-      id
-      description
-      videoId
-      teacher {
-        bio
-        avatarURL
-        name
-      }
-    }
-  }
-`
+
 interface VideoProps {
   lessonSlug: string
 }
 
-interface GetLessonBySlugResponse {
-  lesson:{
-    title: string
-    videoId: string
-    description: string
-    teacher:{
-      bio: string
-      avatarURL: string
-      name: string
-    }
-  }
-}
 
 export function Video({ lessonSlug }: VideoProps) {
-  const {data} = useQuery<GetLessonBySlugResponse>(GET_LESSON_BY_SLUG, {
+  const {data} = useGetLessonBySlugQuery({
     variables:{
-      slug: lessonSlug
+      slug:lessonSlug
     }
   })
-  if(!data) return <div className="flex-1">...</div>
+
+  if(!data || !data.lesson) return <div className="flex-1">...</div>
   console.log('dados', data)
   return (
     <div className='flex-1'>
@@ -70,7 +46,7 @@ export function Video({ lessonSlug }: VideoProps) {
             <p className='mt-4 text-gray-300 leading-relaxed'>
              {data.lesson.description}
             </p>
-            <div className='flex items-center gap-4 mt-6'>
+            {data.lesson?.teacher &&  <div className='flex items-center gap-4 mt-6'>
               <img
                 className='h-16 w-16 rounded-full border-2 border-blue-500'
                 src='https://github.com/viktorhugodev.png'
@@ -85,7 +61,8 @@ export function Video({ lessonSlug }: VideoProps) {
 
                 </span>
               </div>
-            </div>
+            </div>}
+           
           </div>
 
           <div className='flex flex-col gap-4'>

@@ -15,7 +15,7 @@ export function Home() {
           <Sidebar />
         </div>
 
-        <CommentComponent />
+        {/* <CommentComponent /> */}
       </main>
     </div>
   )
